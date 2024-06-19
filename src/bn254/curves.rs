@@ -332,7 +332,7 @@ impl G1Projective {
             // convert scalars to bit-style
             for i in 0..1 {
                 { Fq::roll(4*(TERMS - i - 1) as u32) }
-                
+
                 // decode montgomery
                 { U254::push_one() }
                 { Fr::mul() }
@@ -565,17 +565,18 @@ impl G1Affine {
     }
     // Input Stack: [x,y]
     // Output Stack: [x,y,z] (z=1)
-    pub fn into_projective() -> Script { script!({ Fq::push_one() }) }
+    pub fn into_projective() -> Script {
+        script!({ Fq::push_one() })
+    }
 }
 
 #[cfg(test)]
 mod test {
-    
+
     use crate::bn254::curves::{G1Affine, G1Projective};
     use crate::bn254::fq::Fq;
     use crate::execute_script;
     use crate::treepp::{pushable, script, Script};
-
 
     use crate::bn254::fp254impl::Fp254Impl;
     use ark_bn254::Fr;
@@ -584,9 +585,9 @@ mod test {
     use ark_std::{end_timer, start_timer, UniformRand};
     use core::ops::{Add, Mul};
     use num_bigint::BigUint;
-    use num_traits::{Zero, One};
+    use num_traits::{One, Zero};
     // use std::ops::Mul;
-    
+
     use rand::SeedableRng;
     use rand_chacha::ChaCha20Rng;
     use std::ops::Neg;

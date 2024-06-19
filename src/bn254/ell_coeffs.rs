@@ -77,7 +77,9 @@ impl G2HomProjective {
 }
 
 impl Default for G2Prepared {
-    fn default() -> Self { Self::from(ark_bn254::G2Affine::generator()) }
+    fn default() -> Self {
+        Self::from(ark_bn254::G2Affine::generator())
+    }
 }
 
 impl From<ark_bn254::G2Affine> for G2Prepared {
@@ -117,7 +119,9 @@ impl From<ark_bn254::G2Affine> for G2Prepared {
 }
 
 impl From<ark_bn254::G2Projective> for G2Prepared {
-    fn from(q: ark_bn254::G2Projective) -> Self { q.into_affine().into() }
+    fn from(q: ark_bn254::G2Projective) -> Self {
+        q.into_affine().into()
+    }
 }
 
 impl From<ark_G2Prepared<ark_bn254::Config>> for G2Prepared {
@@ -137,15 +141,21 @@ impl From<ark_G2Prepared<ark_bn254::Config>> for G2Prepared {
 }
 
 impl<'a> From<&'a ark_bn254::G2Affine> for G2Prepared {
-    fn from(other: &'a ark_bn254::G2Affine) -> Self { (*other).into() }
+    fn from(other: &'a ark_bn254::G2Affine) -> Self {
+        (*other).into()
+    }
 }
 
 impl<'a> From<&'a ark_bn254::G2Projective> for G2Prepared {
-    fn from(q: &'a ark_bn254::G2Projective) -> Self { q.into_affine().into() }
+    fn from(q: &'a ark_bn254::G2Projective) -> Self {
+        q.into_affine().into()
+    }
 }
 
 impl<'a> From<&'a ark_G2Prepared<ark_bn254::Config>> for G2Prepared {
-    fn from(q: &'a ark_G2Prepared<ark_bn254::Config>) -> Self { q.to_owned().into() }
+    fn from(q: &'a ark_G2Prepared<ark_bn254::Config>) -> Self {
+        q.to_owned().into()
+    }
 }
 
 pub fn mul_by_char(r: ark_bn254::G2Affine) -> ark_bn254::G2Affine {
@@ -163,7 +173,7 @@ pub fn mul_by_char(r: ark_bn254::G2Affine) -> ark_bn254::G2Affine {
 #[cfg(test)]
 mod tests {
     use ark_bn254::{Fq, Fq2};
-    
+
     use ark_ec::short_weierstrass::SWCurveConfig;
     use ark_ec::AffineRepr;
     use ark_ff::{Field, UniformRand};
@@ -184,10 +194,7 @@ mod tests {
 
         println!("1/2 = {:?}\n\n", two_inv.to_string());
 
-        println!(
-            "COEFF_B = {}\n\n",
-            ark_bn254::g2::Config::COEFF_B
-        );
+        println!("COEFF_B = {}\n\n", ark_bn254::g2::Config::COEFF_B);
 
         println!("before double line:");
         println!("r.x = {:?}", r.x.to_string());
